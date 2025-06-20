@@ -1,7 +1,11 @@
 from django.http import HttpResponse 
+from django.shortcuts import render
+from .models import Question
 
 def index(request):
-    return HttpResponse("Hello User:)) You are at Polls Index...")
+    question_list = Question.objects.all()
+    context = {"question_list" : question_list}
+    return render(request, "polls/index.html", context)
 
 def details(request, question_id):
     return HttpResponse("You are looking at the question %s " % question_id)

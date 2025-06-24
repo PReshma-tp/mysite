@@ -20,7 +20,7 @@ def result(request, question_id):
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
+        selected_choice = question.choice_set.get(pk=request.POST["choice"])
         
     except (KeyError, Choice.DoesNotExist):
         return render(
@@ -31,10 +31,10 @@ def vote(request, question_id):
              }
         )
     else:
-        selected_choice.votes =F(Choice)+1
+        selected_choice.vote =F('vote')+1
         selected_choice.save()
 
-        return HttpResponseRedirect(reverse('polls:results',args=(question_id)))
+        return HttpResponseRedirect(reverse('polls:result',args=(question_id,)))
 
 
    

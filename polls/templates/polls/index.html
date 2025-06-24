@@ -1,7 +1,9 @@
 <!--DOCTYPE HTML-->
+{% load static %}
 <html>
     <head>
         <title>Polls Index Page</title>
+        <link rel="stylesheet" href="{% static 'polls/style.css' %}"/>
     </head>
     <body>
         {% if question_list %}

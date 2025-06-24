@@ -12,7 +12,10 @@ class Question(models.Model):
         return self.question_text
     
     def was_published_recently(self):
-        return self.published_date >= timezone.now()-datetime.timedelta(days=1)
+        current_time = timezone.now()
+        a_day_before_current_time = timezone.now()-datetime.timedelta(days=1)
+        is_published_recent = self.published_date >= a_day_before_current_time and self.published_date<=current_time
+        return is_published_recent
 
 class Choice(models.Model):
     choice_text = models.CharField(max_length= 200)
